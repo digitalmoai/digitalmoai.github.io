@@ -84,7 +84,7 @@ a:hover {
 
 footer {
     position: fixed;
-    height: 9vh;
+    height: 80px;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -147,8 +147,10 @@ footer {
         padding: 10px;
         font-size: 1rem;
     }
+
     footer .inlineca{
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
     footer p{
         margin: 5px 0;
