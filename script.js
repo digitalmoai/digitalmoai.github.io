@@ -9,35 +9,44 @@ document.getElementById('ca').addEventListener('click', function() {
     document.body.removeChild(tempTextArea);
 });
 
-
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
     const img = document.querySelector('header img');
     const h1 = document.querySelector('header h1');
     const h3 = document.querySelector('header h3');
 
-    // Sprawdzanie, ile strony zostało przewinięte
     const scrollY = window.scrollY;
 
-    // Procent zmniejszenia headera (od 1 do 0.6)
-    const heightFactor = Math.max(0.6, 1 - scrollY / 600); // Zmniejsza headera do 60% po przewinięciu o 600px, ale nie mniej niż 60%
+    let initialHeaderHeight = window.innerWidth <= 768 ? 23.1 : 33;
 
-    // Zmiana wysokości nagłówka
-    header.style.height = `${33 * heightFactor}vh`; // Zmienia wysokość nagłówka
+    let headerHeightFactor = Math.max(0.6, 1 - scrollY / (initialHeaderHeight * 20));
+    header.style.height = `${initialHeaderHeight * headerHeightFactor}vh`;
 
-    // Zmiana wysokości obrazu, ale nie mniej niż 60%
-    const imgHeight = Math.max(60, 100 * heightFactor); // Wysokość obrazu nie spadnie poniżej 60%
-    img.style.height = `${imgHeight}%`; // Zmienia wysokość obrazu
-    img.style.width = "100%"; // Rozciąga obraz na całą szerokość
+    const imgHeightFactor = Math.max(0.6, 1 - scrollY / 600);
+    img.style.height = `${100 * imgHeightFactor}%`;
+    img.style.width = "100%";
 
-    // Zmiana rozmiaru tytułu i podtytułu
-    h1.style.fontSize = `${4 * heightFactor}rem`; // Zmniejsza rozmiar głównego tytułu
-    h3.style.fontSize = `${2 * heightFactor}rem`; // Zmniejsza rozmiar podtytułu
-
-    // Ukrywanie h3, kiedy wysokość obrazu osiągnie 80%
-    if (imgHeight <= 80) {
-        h3.style.opacity = '0'; // Ustawia przezroczystość na 0, by tekst zniknął
+    let h1FontSize;
+    if (window.innerWidth <= 768) {
+        h1FontSize = Math.max(4, 4 - scrollY / 50);
     } else {
-        h3.style.opacity = '1'; // Przywraca widoczność tekstu
+        h1FontSize = Math.max(3, 4 - scrollY / 75);
+    }
+    h1.style.fontSize = `${h1FontSize}vw`;
+
+    let h3FontSize;
+    if (window.innerWidth <= 768) {
+        h3FontSize = Math.max(4, 6 - scrollY / 100);
+        h3.style.display = 'block';
+        h3.style.top = '65%';
+    } else {
+        h3FontSize = Math.max(2.4, 4 - scrollY / 100);
+    }
+    h3.style.fontSize = `${h3FontSize}vw`;
+
+    if (img.style.height.replace('%','') <= 80) {
+        h3.style.opacity = '0';
+    } else {
+        h3.style.opacity = '1';
     }
 });
