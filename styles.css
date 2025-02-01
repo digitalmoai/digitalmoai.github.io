@@ -1,3 +1,4 @@
+/* Ogólne style */
 * {
     margin: 0;
     box-sizing: border-box;
@@ -11,6 +12,7 @@ body {
     flex-direction: column;
 }
 
+/* Style dla header */
 header {
     position: fixed;
     top: 0;
@@ -52,26 +54,62 @@ header h3 {
     top: 50%;
 }
 
-
-section {
-    width: 60%;
-    margin: 0 auto;
-    background-color: #a4a4a4;
-    border-radius: 0.6rem;
-    padding: 20px;
-    margin-top: 35vh;
-    margin-bottom: 10vh;
-}
-
+/* Main – zawiera przewijalną treść */
 main {
     flex: 1;
     padding: 50px;
     text-align: center;
     font-size: 1.5rem;
     line-height: 1.8;
-    background-color: #f4f4f4;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.73), rgba(171, 171, 171, 0.65));
+    position: relative;
 }
 
+/* Kontener tła z moai – ustawiony fixed, by być zawsze w tle */
+#moai-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Section z treścią – znajduje się na wierzchu tła */
+section {
+    position: relative;
+    z-index: 1;
+    width: 60%;
+    margin: 0 auto;
+    background: linear-gradient(120deg, rgba(171, 171, 171, 0.65), rgba(255, 255, 255, 0.73));
+    border-radius: 0.6rem;
+    padding: 20px;
+    margin-top: 35vh;
+    margin-bottom: 10vh;
+}
+
+/* Style dla spadających emoji */
+.moai {
+    position: absolute;
+    font-size: 2.5rem;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Pozostałe style */
 a {
     text-decoration: none;
     color: inherit;
@@ -123,36 +161,31 @@ footer {
         font-size: 5vw;
         top: 20%;
     }
-
     header h3 {
         display: none;
     }
-
     header {
         height: 20vh;
     }
-
     section {
         width: 90%;
         margin-top: 22vh;
         font-size: 1rem;
         padding: 10px;
     }
-
     main {
         padding: 20px;
     }
-
     footer {
+        z-index: 10000;
         padding: 10px;
         font-size: 1rem;
     }
-
-    footer .inlineca{
+    footer .inlineca {
         flex-direction: row;
         flex-wrap: nowrap;
     }
-    footer p{
+    footer p {
         margin: 5px 0;
     }
 }

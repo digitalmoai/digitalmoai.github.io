@@ -1,14 +1,14 @@
+// Obsługa kopiowania tekstu
 document.getElementById('ca').addEventListener('click', function() {
     var tempTextArea = document.createElement('textarea');
     tempTextArea.value = this.textContent;
     document.body.appendChild(tempTextArea);
-
     tempTextArea.select();
     document.execCommand('copy');
-
     document.body.removeChild(tempTextArea);
 });
 
+// Dynamiczna zmiana rozmiaru elementów w header podczas scrollowania
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
     const img = document.querySelector('header img');
@@ -16,9 +16,7 @@ window.addEventListener('scroll', function() {
     const h3 = document.querySelector('header h3');
 
     const scrollY = window.scrollY;
-
     let initialHeaderHeight = window.innerWidth <= 768 ? 23.1 : 33;
-
     let headerHeightFactor = Math.max(0.6, 1 - scrollY / (initialHeaderHeight * 20));
     header.style.height = `${initialHeaderHeight * headerHeightFactor}vh`;
 
@@ -50,3 +48,19 @@ window.addEventListener('scroll', function() {
         h3.style.opacity = '1';
     }
 });
+
+// Tworzenie spadających emoji (moai) w tle
+const createMoai = () => {
+    const moai = document.createElement('div');
+    moai.textContent = '🗿';
+    moai.classList.add('moai');
+    moai.style.left = `${Math.random() * 100}vw`;
+    moai.style.animationDuration = `${2 + Math.random() * 3}s`;
+    moai.style.fontSize = `${1 + Math.random() * 3}rem`;
+
+    document.querySelector('#moai-bg').appendChild(moai);
+
+    moai.addEventListener('animationend', () => moai.remove());
+};
+
+setInterval(createMoai, 500);
