@@ -1,4 +1,3 @@
-// Obsługa kopiowania tekstu
 document.getElementById('ca').addEventListener('click', function() {
     var tempTextArea = document.createElement('textarea');
     tempTextArea.value = this.textContent;
@@ -8,7 +7,6 @@ document.getElementById('ca').addEventListener('click', function() {
     document.body.removeChild(tempTextArea);
 });
 
-// Dynamiczna zmiana rozmiaru elementów w header podczas scrollowania
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
     const img = document.querySelector('header img');
@@ -49,7 +47,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Tworzenie spadających emoji (moai) w tle
 const createMoai = () => {
     const moai = document.createElement('div');
     moai.textContent = '🗿';
